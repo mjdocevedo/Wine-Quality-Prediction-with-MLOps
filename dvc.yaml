@@ -34,3 +34,13 @@ stages:
     - data/processed/y_train.csv
     - src/config.yaml
     - src/pipeline/stage04_model_trainer.py
+  model_evaluation:
+    cmd: python src/pipeline/stage05_model_evaluation.py
+    deps:
+    - data/processed/X_test.csv
+    - data/processed/y_test.csv
+    - models/model.joblib
+    - src/config.yaml
+    - src/pipeline/stage05_model_evaluation.py
+    outs:
+    - metrics/metrics.json

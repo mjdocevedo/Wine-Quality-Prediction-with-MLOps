@@ -91,3 +91,31 @@ stages:
       hash: md5
       md5: 6fd75d7808db197e62b4c9903a0d02c7
       size: 971
+  model_evaluation:
+    cmd: python src/pipeline/stage05_model_evaluation.py
+    deps:
+    - path: data/processed/X_test.csv
+      hash: md5
+      md5: 6f236f3504a7dd8c97e49bc73da6392d
+      size: 18509
+    - path: data/processed/y_test.csv
+      hash: md5
+      md5: 818b37499c5ee9171e859fc095b0918e
+      size: 969
+    - path: models/model.joblib
+      hash: md5
+      md5: f4bee717a12c970f972169371365b9a1
+      size: 1279
+    - path: src/config.yaml
+      hash: md5
+      md5: a5173d828dbc0c84c3ff525d0715cea6
+      size: 845
+    - path: src/pipeline/stage05_model_evaluation.py
+      hash: md5
+      md5: 406836103a405165eb5ff185f070cd7c
+      size: 1015
+    outs:
+    - path: metrics/metrics.json
+      hash: md5
+      md5: 76c9ae4490a537a73d6b04fe68a5cc01
+      size: 101

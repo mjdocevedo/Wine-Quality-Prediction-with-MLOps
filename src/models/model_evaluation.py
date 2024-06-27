@@ -24,8 +24,8 @@ class ModelEvaluation:
         return rmse, mae, r2
     
     def log_into_mlflow(self):
-        X_test = pd.read_csv(self.config.test_X_path)
-        y_test = pd.read_csv(self.config.test_y_path)
+        X_test = pd.read_csv(self.config.X_test_path)
+        y_test = pd.read_csv(self.config.y_test_path)
         model = joblib.load(self.config.model_path)
 
         mlflow.set_registry_uri(self.config.mlflow_uri)

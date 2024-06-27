@@ -466,3 +466,33 @@ ValueError: Found input variables with inconsistent numbers of samples: [1279, 3
 2024-06-27 16:31:57,458 - custom_logger - INFO - >>>>> stage Model trainer stage completed <<<<< 
 
  x========x
+2024-06-27 16:36:51,308 - custom_logger - INFO - Custom logger module initialized.
+2024-06-27 16:37:00,776 - dagshub - INFO - Initialized MLflow to track repo "mjdocevedo/wine_quality"
+2024-06-27 16:37:00,777 - dagshub - INFO - Repository mjdocevedo/wine_quality initialized!
+2024-06-27 16:37:00,777 - custom_logger - INFO - >>>>> stage Model evaluation stage started <<<<<
+2024-06-27 16:37:00,779 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-27 16:37:00,780 - custom_logger - INFO - yaml file: src\models\params.yaml loaded successfully
+2024-06-27 16:37:00,781 - custom_logger - INFO - yaml file: src\data\schema.yaml loaded successfully
+2024-06-27 16:37:00,782 - custom_logger - INFO - created directory at: metrics
+2024-06-27 16:37:00,782 - custom_logger - ERROR - 'ModelEvaluationConfig' object has no attribute 'test_X_path'
+Traceback (most recent call last):
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline\stage05_model_evaluation.py", line 28, in <module>
+    obj.main()
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline\stage05_model_evaluation.py", line 22, in main
+    model_evaluation.log_into_mlflow()
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\models\model_evaluation.py", line 27, in log_into_mlflow
+    X_test = pd.read_csv(self.config.test_X_path)
+                         ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ModelEvaluationConfig' object has no attribute 'test_X_path'
+2024-06-27 16:37:41,754 - custom_logger - INFO - Custom logger module initialized.
+2024-06-27 16:37:48,021 - dagshub - INFO - Initialized MLflow to track repo "mjdocevedo/wine_quality"
+2024-06-27 16:37:48,022 - dagshub - INFO - Repository mjdocevedo/wine_quality initialized!
+2024-06-27 16:37:48,022 - custom_logger - INFO - >>>>> stage Model evaluation stage started <<<<<
+2024-06-27 16:37:48,024 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-27 16:37:48,024 - custom_logger - INFO - yaml file: src\models\params.yaml loaded successfully
+2024-06-27 16:37:48,027 - custom_logger - INFO - yaml file: src\data\schema.yaml loaded successfully
+2024-06-27 16:37:48,027 - custom_logger - INFO - created directory at: metrics
+2024-06-27 16:37:48,982 - custom_logger - INFO - json file saved at: metrics\metrics.json
+2024-06-27 16:38:03,823 - custom_logger - INFO - >>>>> stage Model evaluation stage completed <<<<< 
+
+ x========x
