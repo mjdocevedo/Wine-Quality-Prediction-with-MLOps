@@ -4,6 +4,7 @@ import mlflow
 import mlflow.sklearn
 import dagshub
 import joblib
+from pathlib import Path
 from urllib.parse import urlparse
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from src.entity import ModelEvaluationConfig
