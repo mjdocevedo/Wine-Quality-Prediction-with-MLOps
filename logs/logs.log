@@ -299,3 +299,170 @@ x=======x
 2024-06-27 16:14:59,562 - custom_logger - INFO - >>>>> stage Data Transformation stage completed <<<<<
 
 x=======x
+2024-06-27 16:26:16,789 - custom_logger - INFO - Custom logger module initialized.
+2024-06-27 16:26:21,210 - custom_logger - INFO - >>>>> stage Model trainer stage started <<<<<
+2024-06-27 16:26:21,212 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-27 16:26:21,213 - custom_logger - INFO - yaml file: src\models\params.yaml loaded successfully
+2024-06-27 16:26:21,214 - custom_logger - INFO - yaml file: src\data\schema.yaml loaded successfully
+2024-06-27 16:26:21,214 - custom_logger - INFO - created directory at: models
+2024-06-27 16:26:21,214 - custom_logger - ERROR - 'ModelTrainerConfig' object has no attribute 'train_X_path'
+Traceback (most recent call last):
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline\stage04_model_trainer.py", line 28, in <module>
+    obj.main()
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline\stage04_model_trainer.py", line 22, in main
+    model_trainer.train()
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\models\model_trainer.py", line 12, in train
+    X_train = pd.read_csv(self.config.train_X_path)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ModelTrainerConfig' object has no attribute 'train_X_path'
+2024-06-27 16:27:36,097 - custom_logger - INFO - Custom logger module initialized.
+2024-06-27 16:27:38,267 - custom_logger - INFO - >>>>> stage Model trainer stage started <<<<<
+2024-06-27 16:27:38,270 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-27 16:27:38,273 - custom_logger - INFO - yaml file: src\models\params.yaml loaded successfully
+2024-06-27 16:27:38,275 - custom_logger - INFO - yaml file: src\data\schema.yaml loaded successfully
+2024-06-27 16:27:38,277 - custom_logger - INFO - created directory at: models
+2024-06-27 16:27:38,386 - custom_logger - ERROR - Found input variables with inconsistent numbers of samples: [1279, 320]
+Traceback (most recent call last):
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline\stage04_model_trainer.py", line 28, in <module>
+    obj.main()
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline\stage04_model_trainer.py", line 22, in main
+    model_trainer.train()
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\models\model_trainer.py", line 16, in train
+    lr.fit(X_train, y_train)
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\sklearn\base.py", line 1473, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\sklearn\linear_model\_coordinate_descent.py", line 980, in fit
+    X, y = self._validate_data(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\sklearn\base.py", line 650, in _validate_data
+    X, y = check_X_y(X, y, **check_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\sklearn\utils\validation.py", line 1291, in check_X_y
+    check_consistent_length(X, y)
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\sklearn\utils\validation.py", line 460, in check_consistent_length
+    raise ValueError(
+ValueError: Found input variables with inconsistent numbers of samples: [1279, 320]
+2024-06-27 16:29:40,839 - custom_logger - INFO - Custom logger module initialized.
+2024-06-27 16:29:44,387 - custom_logger - INFO - >>>>> stage Model trainer stage started <<<<<
+2024-06-27 16:29:44,399 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-27 16:29:44,400 - custom_logger - INFO - yaml file: src\models\params.yaml loaded successfully
+2024-06-27 16:29:44,404 - custom_logger - INFO - yaml file: src\data\schema.yaml loaded successfully
+2024-06-27 16:29:44,406 - custom_logger - INFO - created directory at: models
+2024-06-27 16:29:44,448 - custom_logger - ERROR - Found input variables with inconsistent numbers of samples: [1279, 320]
+Traceback (most recent call last):
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline\stage04_model_trainer.py", line 28, in <module>
+    obj.main()
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline\stage04_model_trainer.py", line 22, in main
+    model_trainer.train()
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\models\model_trainer.py", line 16, in train
+    lr.fit(X_train, y_train)
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\sklearn\base.py", line 1473, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\sklearn\linear_model\_coordinate_descent.py", line 980, in fit
+    X, y = self._validate_data(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\sklearn\base.py", line 650, in _validate_data
+    X, y = check_X_y(X, y, **check_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\sklearn\utils\validation.py", line 1291, in check_X_y
+    check_consistent_length(X, y)
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\sklearn\utils\validation.py", line 460, in check_consistent_length
+    raise ValueError(
+ValueError: Found input variables with inconsistent numbers of samples: [1279, 320]
+2024-06-27 16:30:29,328 - custom_logger - INFO - Custom logger module initialized.
+2024-06-27 16:30:29,756 - custom_logger - INFO - Parent folder: C:\Users\lenov\OneDrive\Documents\wine_quality
+2024-06-27 16:30:29,756 - custom_logger - INFO - >>>>> stage Data Ingestion stage started <<<<<
+2024-06-27 16:30:29,758 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-27 16:30:29,759 - custom_logger - INFO - yaml file: src\models\params.yaml loaded successfully
+2024-06-27 16:30:29,760 - custom_logger - INFO - yaml file: src\data\schema.yaml loaded successfully
+2024-06-27 16:30:29,760 - custom_logger - INFO - created directory at: data/raw
+2024-06-27 16:30:31,719 - custom_logger - INFO - data/raw/data.zip download! With following info: 
+Connection: close
+Content-Length: 23329
+Cache-Control: max-age=300
+Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox
+Content-Type: application/zip
+ETag: "c69888a4ae59bc5a893392785a938ccd4937981c06ba8a9d6a21aa52b4ab5b6e"
+Strict-Transport-Security: max-age=31536000
+X-Content-Type-Options: nosniff
+X-Frame-Options: deny
+X-XSS-Protection: 1; mode=block
+X-GitHub-Request-Id: A4EB:3486FC:8BF417:92E910:667D7787
+Accept-Ranges: bytes
+Date: Thu, 27 Jun 2024 14:30:32 GMT
+Via: 1.1 varnish
+X-Served-By: cache-par-lfpg1960020-PAR
+X-Cache: MISS
+X-Cache-Hits: 0
+X-Timer: S1719498632.851758,VS0,VE162
+Vary: Authorization,Accept-Encoding,Origin
+Access-Control-Allow-Origin: *
+Cross-Origin-Resource-Policy: cross-origin
+X-Fastly-Request-ID: c20082467264c3343f1c6f226689ba380c4181ac
+Expires: Thu, 27 Jun 2024 14:35:32 GMT
+Source-Age: 0
+
+
+2024-06-27 16:30:31,751 - custom_logger - INFO - >>>>> stage Data Ingestion stage completed <<<<<
+
+x=======x
+2024-06-27 16:30:32,535 - custom_logger - INFO - Custom logger module initialized.
+2024-06-27 16:30:34,324 - custom_logger - INFO - >>>>> stage Data Validation stage started <<<<<
+2024-06-27 16:30:34,327 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-27 16:30:34,328 - custom_logger - INFO - yaml file: src\models\params.yaml loaded successfully
+2024-06-27 16:30:34,338 - custom_logger - INFO - yaml file: src\data\schema.yaml loaded successfully
+2024-06-27 16:30:34,338 - custom_logger - INFO - created directory at: data
+2024-06-27 16:30:34,372 - custom_logger - INFO - >>>>> stage Data Validation stage completed <<<<<
+
+x=======x
+2024-06-27 16:30:36,321 - custom_logger - INFO - Custom logger module initialized.
+2024-06-27 16:30:39,223 - custom_logger - INFO - >>>>> stage Data Transformation stage started <<<<<
+2024-06-27 16:30:39,231 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-27 16:30:39,233 - custom_logger - INFO - yaml file: src\models\params.yaml loaded successfully
+2024-06-27 16:30:39,237 - custom_logger - INFO - yaml file: src\data\schema.yaml loaded successfully
+2024-06-27 16:30:39,237 - custom_logger - INFO - created directory at: data/processed
+2024-06-27 16:30:39,298 - custom_logger - INFO - Splitted data into training and test sets
+2024-06-27 16:30:39,300 - custom_logger - INFO - X_train shape: (1279, 11), y_train shape: (1279,)
+2024-06-27 16:30:39,300 - custom_logger - INFO - X_test shape: (320, 11), y_test shape: (320,)
+2024-06-27 16:30:39,304 - custom_logger - INFO - >>>>> stage Data Transformation stage completed <<<<<
+
+x=======x
+2024-06-27 16:30:40,620 - custom_logger - INFO - Custom logger module initialized.
+2024-06-27 16:30:44,659 - custom_logger - INFO - >>>>> stage Model trainer stage started <<<<<
+2024-06-27 16:30:44,662 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-27 16:30:44,664 - custom_logger - INFO - yaml file: src\models\params.yaml loaded successfully
+2024-06-27 16:30:44,668 - custom_logger - INFO - yaml file: src\data\schema.yaml loaded successfully
+2024-06-27 16:30:44,670 - custom_logger - INFO - created directory at: models
+2024-06-27 16:30:44,711 - custom_logger - ERROR - Found input variables with inconsistent numbers of samples: [1279, 320]
+Traceback (most recent call last):
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline\stage04_model_trainer.py", line 28, in <module>
+    obj.main()
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline\stage04_model_trainer.py", line 22, in main
+    model_trainer.train()
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\models\model_trainer.py", line 16, in train
+    lr.fit(X_train, y_train)
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\sklearn\base.py", line 1473, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\sklearn\linear_model\_coordinate_descent.py", line 980, in fit
+    X, y = self._validate_data(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\sklearn\base.py", line 650, in _validate_data
+    X, y = check_X_y(X, y, **check_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\sklearn\utils\validation.py", line 1291, in check_X_y
+    check_consistent_length(X, y)
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\sklearn\utils\validation.py", line 460, in check_consistent_length
+    raise ValueError(
+ValueError: Found input variables with inconsistent numbers of samples: [1279, 320]
+2024-06-27 16:31:54,056 - custom_logger - INFO - Custom logger module initialized.
+2024-06-27 16:31:57,406 - custom_logger - INFO - >>>>> stage Model trainer stage started <<<<<
+2024-06-27 16:31:57,409 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-27 16:31:57,410 - custom_logger - INFO - yaml file: src\models\params.yaml loaded successfully
+2024-06-27 16:31:57,412 - custom_logger - INFO - yaml file: src\data\schema.yaml loaded successfully
+2024-06-27 16:31:57,412 - custom_logger - INFO - created directory at: models
+2024-06-27 16:31:57,458 - custom_logger - INFO - >>>>> stage Model trainer stage completed <<<<< 
+
+ x========x

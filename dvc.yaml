@@ -27,3 +27,10 @@ stages:
     - data/processed/X_train.csv
     - data/processed/y_test.csv
     - data/processed/y_train.csv
+  model_trainer:
+    cmd: python src/pipeline/stage04_model_trainer.py
+    deps:
+    - data/processed/X_train.csv
+    - data/processed/y_train.csv
+    - src/config.yaml
+    - src/pipeline/stage04_model_trainer.py

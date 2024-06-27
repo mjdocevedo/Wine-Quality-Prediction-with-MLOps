@@ -9,8 +9,8 @@ class ModelTrainer:
         self.config = config
 
     def train(self):
-        X_train = pd.read_csv(self.config.train_X_path)
-        y_train = pd.read_csv(self.config.train_y_path)
+        X_train = pd.read_csv(self.config.X_train_path)
+        y_train = pd.read_csv(self.config.y_train_path)
 
         lr = ElasticNet(alpha = self.config.alpha, l1_ratio = self.config.l1_ratio, random_state=42)
         lr.fit(X_train, y_train)
