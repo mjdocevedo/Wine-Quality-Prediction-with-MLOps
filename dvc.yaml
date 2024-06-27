@@ -6,3 +6,11 @@ stages:
     - src/pipeline/stage01_data_ingestion.py
     outs:
     - data/raw/winequality-red.csv
+
+  data_validation:
+    cmd: python src/pipeline/stage02_data_validation.py
+    deps:
+    - src/config.yaml
+    - src/pipeline/stage02_data_validation.py
+    outs:
+    - data/status.txt

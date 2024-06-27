@@ -56,3 +56,140 @@ x=======x
 2024-06-26 15:05:33,681 - custom_logger - INFO - yaml file: src\data\schema.yaml loaded successfully
 2024-06-26 15:05:33,683 - custom_logger - INFO - created directory at: data/raw
 2024-06-26 15:05:33,683 - custom_logger - INFO - File already exists.
+2024-06-27 15:47:59,157 - custom_logger - INFO - Custom logger module initialized.
+2024-06-27 15:48:02,427 - custom_logger - INFO - >>>>> stage Data Validation stage started <<<<<
+2024-06-27 15:48:02,427 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-27 15:48:02,441 - custom_logger - INFO - yaml file: src\models\params.yaml loaded successfully
+2024-06-27 15:48:02,443 - custom_logger - INFO - yaml file: src\data\schema.yaml loaded successfully
+2024-06-27 15:48:02,443 - custom_logger - INFO - created directory at: data
+2024-06-27 15:48:02,443 - custom_logger - ERROR - "'ConfigBox' object has no attribute 'unzip_data_dir'"
+Traceback (most recent call last):
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\box\box.py", line 503, in __getitem__
+    return super().__getitem__(item)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'unzip_data_dir'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\box\box.py", line 536, in __getattr__
+    value = self.__getitem__(item, _ignore_default=True)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\box\box.py", line 524, in __getitem__
+    raise BoxKeyError(str(err)) from _exception_cause(err)
+box.exceptions.BoxKeyError: "'unzip_data_dir'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\box\box.py", line 538, in __getattr__
+    value = object.__getattribute__(self, item)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ConfigBox' object has no attribute 'unzip_data_dir'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\box\config_box.py", line 28, in __getattr__
+    return super().__getattr__(item)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\box\box.py", line 552, in __getattr__
+    raise BoxKeyError(str(err)) from _exception_cause(err)
+box.exceptions.BoxKeyError: "'ConfigBox' object has no attribute 'unzip_data_dir'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\box\box.py", line 503, in __getitem__
+    return super().__getitem__(item)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'unzip_data_dir'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\box\box.py", line 536, in __getattr__
+    value = self.__getitem__(item, _ignore_default=True)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\box\box.py", line 524, in __getitem__
+    raise BoxKeyError(str(err)) from _exception_cause(err)
+box.exceptions.BoxKeyError: "'unzip_data_dir'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\box\box.py", line 538, in __getattr__
+    value = object.__getattribute__(self, item)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ConfigBox' object has no attribute 'unzip_data_dir'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline\stage02_data_validation.py", line 28, in <module>
+    obj.main()
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline\stage02_data_validation.py", line 20, in main
+    data_validation_config = config.get_data_validation_config()
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\config_manager.py", line 44, in get_data_validation_config
+    unzip_data_dir = config.unzip_data_dir,
+                     ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\box\config_box.py", line 30, in __getattr__
+    return super().__getattr__(item.lower())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\box\box.py", line 552, in __getattr__
+    raise BoxKeyError(str(err)) from _exception_cause(err)
+box.exceptions.BoxKeyError: "'ConfigBox' object has no attribute 'unzip_data_dir'"
+2024-06-27 15:52:35,533 - custom_logger - INFO - Custom logger module initialized.
+2024-06-27 15:52:37,302 - custom_logger - INFO - >>>>> stage Data Validation stage started <<<<<
+2024-06-27 15:52:37,311 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-27 15:52:37,312 - custom_logger - INFO - yaml file: src\models\params.yaml loaded successfully
+2024-06-27 15:52:37,314 - custom_logger - INFO - yaml file: src\data\schema.yaml loaded successfully
+2024-06-27 15:52:37,316 - custom_logger - INFO - created directory at: data
+2024-06-27 15:52:37,321 - custom_logger - ERROR - [Errno 2] No such file or directory: 'data/raw/wine_quality.csv'
+Traceback (most recent call last):
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline\stage02_data_validation.py", line 28, in <module>
+    obj.main()
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline\stage02_data_validation.py", line 22, in main
+    data_validation.validate_all_columns()
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\data\data_validation.py", line 27, in validate_all_columns
+    raise e
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\data\data_validation.py", line 11, in validate_all_columns
+    data = pd.read_csv(self.config.unzip_data_dir)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\pandas\io\parsers\readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\pandas\io\parsers\readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\pandas\io\parsers\readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\pandas\io\parsers\readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\pandas\io\common.py", line 873, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'data/raw/wine_quality.csv'
+2024-06-27 15:54:52,219 - custom_logger - INFO - Custom logger module initialized.
+2024-06-27 15:54:52,920 - custom_logger - INFO - Parent folder: C:\Users\lenov\OneDrive\Documents\wine_quality
+2024-06-27 15:54:52,920 - custom_logger - INFO - >>>>> stage Data Ingestion stage started <<<<<
+2024-06-27 15:54:52,920 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-27 15:54:52,944 - custom_logger - INFO - yaml file: src\models\params.yaml loaded successfully
+2024-06-27 15:54:52,944 - custom_logger - INFO - yaml file: src\data\schema.yaml loaded successfully
+2024-06-27 15:54:52,944 - custom_logger - INFO - created directory at: data/raw
+2024-06-27 15:54:52,944 - custom_logger - INFO - File already exists.
+2024-06-27 15:54:52,976 - custom_logger - INFO - >>>>> stage Data Ingestion stage completed <<<<<
+
+x=======x
+2024-06-27 15:54:53,854 - custom_logger - INFO - Custom logger module initialized.
+2024-06-27 15:54:55,641 - custom_logger - INFO - >>>>> stage Data Validation stage started <<<<<
+2024-06-27 15:54:55,648 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-27 15:54:55,648 - custom_logger - INFO - yaml file: src\models\params.yaml loaded successfully
+2024-06-27 15:54:55,648 - custom_logger - INFO - yaml file: src\data\schema.yaml loaded successfully
+2024-06-27 15:54:55,648 - custom_logger - INFO - created directory at: data
+2024-06-27 15:54:55,735 - custom_logger - INFO - >>>>> stage Data Validation stage completed <<<<<
+
+x=======x

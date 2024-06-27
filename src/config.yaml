@@ -6,7 +6,7 @@ data_ingestion:
 
 data_validation:
   root_dir: data
-  unzip_dir: data/raw/wine_quality.csv
+  unzip_dir: data/raw/winequality-red.csv
   STATUS_FILE: data/status.txt
 
 data_transformation: 
