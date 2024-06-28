@@ -5,7 +5,7 @@ from starlette.requests import Request
 import os
 import numpy as np
 import pandas as pd
-from src.pipeline.prediction import PredictionPipeline
+from src.pipeline_steps.prediction import PredictionPipeline
 
 app = FastAPI()  # Initializing a FastAPI app
 templates = Jinja2Templates(directory="templates")  # Directory for HTML templates

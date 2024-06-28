@@ -6,7 +6,7 @@ parent_folder = str(Path(__file__).parent.parent.parent)
 sys.path.append(parent_folder)
 
 from src.config_manager import ConfigurationManager
-from src.models.model_trainer import ModelTrainer
+from src.models_module_def.model_trainer import ModelTrainer
 from custom_logger import logger
 
 STAGE_NAME = "Model trainer stage"

@@ -7,7 +7,7 @@ sys.path.append(parent_folder)
 
 from custom_logger import logger
 from src.config_manager import ConfigurationManager
-from src.data.data_ingestion import DataIngestion
+from src.data_module_def.data_ingestion import DataIngestion
 
 # logging the parent directory
 logger.info(f"Parent folder: {parent_folder}")
