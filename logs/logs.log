@@ -497,3 +497,79 @@ AttributeError: 'ModelEvaluationConfig' object has no attribute 'test_X_path'
 
  x========x
 2024-06-28 17:19:14,999 - custom_logger - INFO - Custom logger module initialized.
+2024-06-28 17:31:21,135 - custom_logger - INFO - Custom logger module initialized.
+2024-06-28 17:31:22,295 - custom_logger - INFO - Parent folder: C:\Users\lenov\OneDrive\Documents\wine_quality
+2024-06-28 17:31:22,295 - custom_logger - INFO - >>>>> stage Data Ingestion stage started <<<<<
+2024-06-28 17:31:22,295 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-28 17:31:22,295 - custom_logger - ERROR - [Errno 2] No such file or directory: 'src\\models\\params.yaml'
+Traceback (most recent call last):
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline_steps\stage01_data_ingestion.py", line 33, in <module>
+    obj.main()
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\pipeline_steps\stage01_data_ingestion.py", line 23, in main
+    config = ConfigurationManager()
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\config_manager.py", line 17, in __init__
+    self.params = read_yaml(params_filepath)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lenov\OneDrive\Documents\wine_quality\wq_env\Lib\site-packages\ensure\main.py", line 849, in __call__
+    return_val = self.f(*args, **kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\common_utils.py", line 34, in read_yaml
+    raise e
+  File "C:\Users\lenov\OneDrive\Documents\wine_quality\src\common_utils.py", line 27, in read_yaml
+    with open(path_to_yaml) as yaml_file:
+         ^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'src\\models\\params.yaml'
+2024-06-28 17:33:04,936 - custom_logger - INFO - Custom logger module initialized.
+2024-06-28 17:33:05,728 - custom_logger - INFO - Parent folder: C:\Users\lenov\OneDrive\Documents\wine_quality
+2024-06-28 17:33:05,728 - custom_logger - INFO - >>>>> stage Data Ingestion stage started <<<<<
+2024-06-28 17:33:05,738 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-28 17:33:05,738 - custom_logger - INFO - yaml file: src\models_module_def\params.yaml loaded successfully
+2024-06-28 17:33:05,738 - custom_logger - INFO - yaml file: src\data_module_def\schema.yaml loaded successfully
+2024-06-28 17:33:05,738 - custom_logger - INFO - created directory at: data/raw
+2024-06-28 17:33:05,738 - custom_logger - INFO - File already exists.
+2024-06-28 17:33:05,759 - custom_logger - INFO - >>>>> stage Data Ingestion stage completed <<<<<
+
+x=======x
+2024-06-28 17:33:06,940 - custom_logger - INFO - Custom logger module initialized.
+2024-06-28 17:33:11,161 - custom_logger - INFO - >>>>> stage Data Validation stage started <<<<<
+2024-06-28 17:33:11,161 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-28 17:33:11,161 - custom_logger - INFO - yaml file: src\models_module_def\params.yaml loaded successfully
+2024-06-28 17:33:11,171 - custom_logger - INFO - yaml file: src\data_module_def\schema.yaml loaded successfully
+2024-06-28 17:33:11,171 - custom_logger - INFO - created directory at: data
+2024-06-28 17:33:11,197 - custom_logger - INFO - >>>>> stage Data Validation stage completed <<<<<
+
+x=======x
+2024-06-28 17:33:12,038 - custom_logger - INFO - Custom logger module initialized.
+2024-06-28 17:33:18,772 - custom_logger - INFO - >>>>> stage Data Transformation stage started <<<<<
+2024-06-28 17:33:18,788 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-28 17:33:18,788 - custom_logger - INFO - yaml file: src\models_module_def\params.yaml loaded successfully
+2024-06-28 17:33:18,792 - custom_logger - INFO - yaml file: src\data_module_def\schema.yaml loaded successfully
+2024-06-28 17:33:18,793 - custom_logger - INFO - created directory at: data/processed
+2024-06-28 17:33:18,822 - custom_logger - INFO - Splitted data into training and test sets
+2024-06-28 17:33:18,822 - custom_logger - INFO - X_train shape: (1279, 11), y_train shape: (1279,)
+2024-06-28 17:33:18,822 - custom_logger - INFO - X_test shape: (320, 11), y_test shape: (320,)
+2024-06-28 17:33:18,822 - custom_logger - INFO - >>>>> stage Data Transformation stage completed <<<<<
+
+x=======x
+2024-06-28 17:33:20,672 - custom_logger - INFO - Custom logger module initialized.
+2024-06-28 17:33:23,942 - custom_logger - INFO - >>>>> stage Model trainer stage started <<<<<
+2024-06-28 17:33:23,943 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-28 17:33:23,943 - custom_logger - INFO - yaml file: src\models_module_def\params.yaml loaded successfully
+2024-06-28 17:33:23,943 - custom_logger - INFO - yaml file: src\data_module_def\schema.yaml loaded successfully
+2024-06-28 17:33:23,943 - custom_logger - INFO - created directory at: models
+2024-06-28 17:33:23,981 - custom_logger - INFO - >>>>> stage Model trainer stage completed <<<<< 
+
+ x========x
+2024-06-28 17:33:24,867 - custom_logger - INFO - Custom logger module initialized.
+2024-06-28 17:33:32,677 - dagshub - INFO - Initialized MLflow to track repo "mjdocevedo/wine_quality"
+2024-06-28 17:33:32,677 - dagshub - INFO - Repository mjdocevedo/wine_quality initialized!
+2024-06-28 17:33:32,677 - custom_logger - INFO - >>>>> stage Model evaluation stage started <<<<<
+2024-06-28 17:33:32,694 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-28 17:33:32,694 - custom_logger - INFO - yaml file: src\models_module_def\params.yaml loaded successfully
+2024-06-28 17:33:32,697 - custom_logger - INFO - yaml file: src\data_module_def\schema.yaml loaded successfully
+2024-06-28 17:33:32,697 - custom_logger - INFO - created directory at: metrics
+2024-06-28 17:33:33,344 - custom_logger - INFO - json file saved at: metrics\metrics.json
+2024-06-28 17:33:47,854 - custom_logger - INFO - >>>>> stage Model evaluation stage completed <<<<< 
+
+ x========x
