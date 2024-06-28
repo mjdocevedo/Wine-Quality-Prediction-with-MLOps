@@ -573,3 +573,11 @@ x=======x
 2024-06-28 17:33:47,854 - custom_logger - INFO - >>>>> stage Model evaluation stage completed <<<<< 
 
  x========x
+2024-06-28 17:35:38,610 - custom_logger - INFO - Custom logger module initialized.
+2024-06-28 17:35:57,970 - dagshub - INFO - Initialized MLflow to track repo "mjdocevedo/wine_quality"
+2024-06-28 17:35:57,977 - dagshub - INFO - Repository mjdocevedo/wine_quality initialized!
+2024-06-28 17:35:59,834 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-06-28 17:35:59,849 - custom_logger - INFO - yaml file: src\models_module_def\params.yaml loaded successfully
+2024-06-28 17:35:59,851 - custom_logger - INFO - yaml file: src\data_module_def\schema.yaml loaded successfully
+2024-06-28 17:35:59,852 - custom_logger - INFO - created directory at: data/raw
+2024-06-28 17:35:59,853 - custom_logger - INFO - File already exists.
