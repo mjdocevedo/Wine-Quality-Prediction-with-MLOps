@@ -496,3 +496,4 @@ AttributeError: 'ModelEvaluationConfig' object has no attribute 'test_X_path'
 2024-06-27 16:38:03,823 - custom_logger - INFO - >>>>> stage Model evaluation stage completed <<<<< 
 
  x========x
+2024-06-28 17:19:14,999 - custom_logger - INFO - Custom logger module initialized.
