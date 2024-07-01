@@ -1,13 +1,25 @@
-from fastapi import FastAPI, Form
+from fastapi import FastAPI, Form, HTTPException, Depends, status
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from starlette.requests import Request
+from hashlib import sha256
 import os
 import numpy as np
 import pandas as pd
+from datetime import datetime, timedelta
+import jwt
+from cryptography.fernet import Fernet
 from src.pipeline_steps.prediction import PredictionPipeline
 
 app = FastAPI()  # Initializing a FastAPI app
+
+# Constants
+JSON_FILE_PATH = os.path.expanduser("./users/users.json")
+SECRET_KEY = Fernet.generate_key()
+ALGORITHM = "H256"
+oauth_scheme = OAuth2PasswordBearer(tokenUrl="/token")
+
 templates = Jinja2Templates(directory="templates")  # Directory for HTML templates
 
 @app.get("/", response_class=HTMLResponse)
