@@ -4,10 +4,9 @@ from pathlib import Path
 # Add parent directory to path
 parent_folder = str(Path(__file__).parent.parent.parent)
 sys.path.append(parent_folder)
-import sys
-from pathlib import Path
+
 from fastapi import FastAPI, Form, HTTPException, Depends, status
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from starlette.requests import Request
@@ -23,15 +22,15 @@ from typing import List
 from cryptography.fernet import Fernet
 from src.pipeline_steps.prediction import PredictionPipeline
 
-app = FastAPI()
+app = FastAPI()  # Initializing a FastAPI app
 
 # Constants
 JSON_FILE_PATH = os.path.expanduser("./users/users.json")
 SECRET_KEY = Fernet.generate_key()
-ALGORITHM = "HS256"
+ALGORITHM = "H256"
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
 
-# Allowed ranges for variable values
+# Valid ranges for variable values
 ALLOWED_RANGES = {
     "fixed_acidity": (4.6, 15.9),
     "volatile_acidity": (0.12, 1.58),
@@ -46,8 +45,10 @@ ALLOWED_RANGES = {
     "alcohol": (8.4, 14.9)
 }
 
-templates = Jinja2Templates(directory="templates")
+oauth_scheme = OAuth2PasswordBearer(tokenUrl="/token")
+templates = Jinja2Templates(directory="templates")  # Directory for HTML templates
 
+# User Models
 class User(BaseModel):
     username: str
     first_name: str
@@ -63,7 +64,13 @@ class UserInDB(User):
     password: str
 
     class Config:
-        from_attributes = True
+        orm_mode = True
+
+class UserPred(BaseModel):
+    age: int
+    sex: str
+    favorite_color: str
+    favorite_food: str
 
 class Token(BaseModel):
     access_token: str
@@ -82,6 +89,7 @@ class WineFeatures(BaseModel):
     sulphates: float
     alcohol: float
 
+# Helper Functions
 def verify_password(plain_password, hashed_password):
     return sha256(plain_password.encode()).hexdigest() == hashed_password
 
@@ -124,25 +132,10 @@ def validate_wine_features(features: WineFeatures):
                 detail=f"Invalid value for {feature_name}: {value}. Must be between {min_val} and {max_val}."
             )
 
+# Endpoints
 @app.get("/", response_class=HTMLResponse)
 async def home_page(request: Request):
-    return templates.TemplateResponse("login.html", {"request": request})
-
-@app.get("/login", response_class=HTMLResponse)
-async def login_page(request: Request):
-    return templates.TemplateResponse("login.html", {"request": request})
-
-@app.post("/token", response_model=Token)
-async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
-    username = form_data.username
-    password = form_data.password
-    users = load_users()
-    for user in users:
-        if user.username == username and verify_password(password, user.password):
-            token_data = {"sub": username}
-            access_token = create_access_token(token_data, expires_delta=timedelta(minutes=30))
-            return {"access_token": access_token, "token_type": "bearer"}
-    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
+    return templates.TemplateResponse("index.html", {"request": request})
 
 @app.post("/register", response_model=UserOut)
 async def register(user: User):
@@ -152,9 +145,10 @@ async def register(user: User):
     save_user(user_in_db)
     return UserOut(**user_data)
 
-@app.get("/predict", response_class=HTMLResponse)
-async def prediction_form(request: Request, token: str = Depends(oauth2_scheme)):
-    return templates.TemplateResponse("index.html", {"request": request})
+@app.get("/train")
+async def training():
+    os.system("python main.py")
+    return {"message": "Training successful!"}
 
 @app.post("/predict", response_class=HTMLResponse)
 async def predict(
@@ -169,13 +163,9 @@ async def predict(
     density: float = Form(...),
     pH: float = Form(...),
     sulphates: float = Form(...),
-    alcohol: float = Form(...),
-    token: str = Depends(oauth2_scheme)
+    alcohol: float = Form(...)
 ):
     try:
-        # Validate the user
-        current_user = get_current_user(token)
-        
         # Create a WineFeatures instance with the form data
         features = WineFeatures(
             fixed_acidity=fixed_acidity,
@@ -207,6 +197,10 @@ async def predict(
     
     except HTTPException as e:
         return templates.TemplateResponse("results.html", {"request": request, "prediction": e.detail})
+    
+    #except Exception as e:
+    #    print('The Exception message is:', e)
+    #    return templates.TemplateResponse("results.html", {"request": request, "prediction": e.detail})
 
 if __name__ == "__main__":
     import uvicorn
