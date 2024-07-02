@@ -1,3 +1,10 @@
+import sys
+from pathlib import Path
+
+# Add parent directory to path
+parent_folder = str(Path(__file__).parent.parent.parent)
+sys.path.append(parent_folder)
+
 from fastapi import FastAPI, Form, HTTPException, Depends, status
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -5,10 +12,13 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from starlette.requests import Request
 from hashlib import sha256
 import os
+import json
 import numpy as np
 import pandas as pd
 from datetime import datetime, timedelta
 import jwt
+from pydantic import BaseModel
+from typing import List
 from cryptography.fernet import Fernet
 from src.pipeline_steps.prediction import PredictionPipeline
 
@@ -18,9 +28,109 @@ app = FastAPI()  # Initializing a FastAPI app
 JSON_FILE_PATH = os.path.expanduser("./users/users.json")
 SECRET_KEY = Fernet.generate_key()
 ALGORITHM = "H256"
-oauth_scheme = OAuth2PasswordBearer(tokenUrl="/token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
 
+# Valid ranges for variable values
+ALLOWED_RANGES = {
+    "fixed acidity": (4.6, 15.9),
+    "volatile acidity": (0.12, 1.58),
+    "citric acid": (0.0, 1.66),
+    "residual sugar": (0.9, 15.5),
+    "chlorides": (0.012, 0.611),
+    "free sulfur dioxide": (1, 72),
+    "total sulfur dioxide": (6, 289),
+    "density": (0.99007, 1.00369),
+    "pH": (2.74, 4.01),
+    "sulphates": (0.33, 2.0),
+    "alcohol": (8.4, 14.9)
+}
+
+oauth_scheme = OAuth2PasswordBearer(tokenUrl="/token")
 templates = Jinja2Templates(directory="templates")  # Directory for HTML templates
+
+# User Models
+class User(BaseModel):
+    username: str
+    first_name: str
+    last_name: str
+    password: str
+
+class UserOut(BaseModel):
+    username: str
+    first_name: str
+    last_name: str
+
+class UserInDB(User):
+    password: str
+
+    class Config:
+        orm_mode = True
+
+class UserPred(BaseModel):
+    age: int
+    sex: str
+    favorite_color: str
+    favorite_food: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class WineFeatures(BaseModel):
+    fixed_acidity: float
+    volatile_acidity: float
+    citric_acid: float
+    residual_sugar: float
+    chlorides: float
+    free_sulfur_dioxide: float
+    total_sulfur_dioxide: float
+    density: float
+    pH: float
+    sulphates: float
+    alcohol: float
+
+# Helper Functions
+def verify_password(plain_password, hashed_password):
+    return sha256(plain_password.encode()).hexdigest() == hashed_password
+
+def load_users():
+    if os.path.exists(JSON_FILE_PATH):
+        with open(JSON_FILE_PATH, "r") as file:
+            users_data = json.load(file)
+        return [UserInDB(**user) for user in users_data]
+    return []
+
+def save_user(user: UserInDB):
+    users = load_users()
+    users.append(user)
+    with open(JSON_FILE_PATH, "w") as file:
+        json.dump([user.dict() for user in users], file)
+
+def create_access_token(data: dict, expires_delta: timedelta = None):
+    to_encode = data.copy()
+    if expires_delta:
+        expire = datetime.utcnow() + expires_delta
+    else:
+        expire = datetime.utcnow() + timedelta(minutes=15)
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
+
+def get_current_user(token: str = Depends(oauth2_scheme)):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        return {"username": payload["sub"]}
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token expired")
+    
+def validate_wine_features(features: WineFeatures):
+    for feature_name, value in features.dict().items():
+        min_val, max_val = ALLOWED_RANGES[feature_name]
+        if not (min_val <= value <= max_val):
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid value for {feature_name}: {value}. Must be between {min_val} and {max_val}."
+            )
 
 @app.get("/", response_class=HTMLResponse)
 async def home_page(request: Request):
@@ -47,16 +157,37 @@ async def predict(
     alcohol: float = Form(...)
 ):
     try:
+        # Create a WineFeatures instance with the form data
+        features = WineFeatures(
+            fixed_acidity=fixed_acidity,
+            volatile_acidity=volatile_acidity,
+            citric_acid=citric_acid,
+            residual_sugar=residual_sugar,
+            chlorides=chlorides,
+            free_sulfur_dioxide=free_sulfur_dioxide,
+            total_sulfur_dioxide=total_sulfur_dioxide,
+            density=density,
+            pH=pH,
+            sulphates=sulphates,
+            alcohol=alcohol
+        )
+
+        # Validate the features
+        validate_wine_features(features)
+
+        # Proceed with the prediction
         data = np.array([
             fixed_acidity, volatile_acidity, citric_acid, residual_sugar, chlorides,
             free_sulfur_dioxide, total_sulfur_dioxide, density, pH, sulphates, alcohol
         ]).reshape(1, 11)
 
         obj = PredictionPipeline()
-        predict = obj.predict(data)
+        prediction = obj.predict(data)
 
-        return templates.TemplateResponse("results.html", {"request": request, "prediction": str(predict)})
+        return templates.TemplateResponse("results.html", {"request": request, "prediction": str(prediction)})
     
+    except HTTPException as e:
+        return templates.TemplateResponse("results.html", {"request": request, "prediction": e.detail})
     except Exception as e:
         print('The Exception message is:', e)
         return templates.TemplateResponse("results.html", {"request": request, "prediction": "something is wrong"})
