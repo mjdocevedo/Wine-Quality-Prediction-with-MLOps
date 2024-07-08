@@ -1,10 +1,12 @@
 dvc
+dvc["s3"]
 pandas 
 mlflow==2.2.2
 notebook
 numpy
 scikit-learn
 matplotlib
+pydantic==2.7.4
 python-box==6.0.2
 pyYAML
 tqdm
