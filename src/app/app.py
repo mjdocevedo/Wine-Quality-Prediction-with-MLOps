@@ -1,33 +1,32 @@
 import sys
 from pathlib import Path
-
 # Add parent directory to path
 parent_folder = str(Path(__file__).parent.parent.parent)
 sys.path.append(parent_folder)
-import sys
-from pathlib import Path
+
+import os
+import json
+from hashlib import sha256
+from datetime import datetime, timedelta
+from typing import List
+
 from fastapi import FastAPI, Form, HTTPException, Depends, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from starlette.requests import Request
-from hashlib import sha256
-import os
-import json
-import numpy as np
-import pandas as pd
-from datetime import datetime, timedelta
-import jwt
 from pydantic import BaseModel
-from typing import List
 from cryptography.fernet import Fernet
+import jwt
+import numpy as np
+
 from src.pipeline_steps.prediction import PredictionPipeline
 
 app = FastAPI()
 
 # Constants
 JSON_FILE_PATH = os.path.expanduser("./users/users.json")
-SECRET_KEY = Fernet.generate_key()
+SECRET_KEY = "your_jwt_secret_key"  # Use a secure secret key
 ALGORITHM = "HS256"
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
 
@@ -61,7 +60,6 @@ class UserOut(BaseModel):
 
 class UserInDB(User):
     password: str
-
     class Config:
         from_attributes = True
 
@@ -114,7 +112,7 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
         return {"username": payload["sub"]}
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=401, detail="Token expired")
-    
+
 def validate_wine_features(features: WineFeatures):
     for feature_name, value in features.dict().items():
         min_val, max_val = ALLOWED_RANGES[feature_name]
@@ -152,10 +150,6 @@ async def register(user: User):
     save_user(user_in_db)
     return UserOut(**user_data)
 
-@app.get("/predict", response_class=HTMLResponse)
-async def prediction_form(request: Request, token: str = Depends(oauth2_scheme)):
-    return templates.TemplateResponse("index.html", {"request": request})
-
 @app.post("/predict", response_class=HTMLResponse)
 async def predict(
     request: Request,
@@ -175,7 +169,6 @@ async def predict(
     try:
         # Validate the user
         current_user = get_current_user(token)
-        
         # Create a WineFeatures instance with the form data
         features = WineFeatures(
             fixed_acidity=fixed_acidity,
@@ -190,21 +183,16 @@ async def predict(
             sulphates=sulphates,
             alcohol=alcohol
         )
-
         # Validate the features
         validate_wine_features(features)
-
         # Proceed with the prediction
         data = np.array([
             fixed_acidity, volatile_acidity, citric_acid, residual_sugar, chlorides,
             free_sulfur_dioxide, total_sulfur_dioxide, density, pH, sulphates, alcohol
         ]).reshape(1, 11)
-
         obj = PredictionPipeline()
         prediction = obj.predict(data)
-
         return templates.TemplateResponse("results.html", {"request": request, "prediction": str(prediction)})
-    
     except HTTPException as e:
         return templates.TemplateResponse("results.html", {"request": request, "prediction": e.detail})
 
