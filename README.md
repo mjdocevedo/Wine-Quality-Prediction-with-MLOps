@@ -127,16 +127,19 @@ Again, you can refer to the notebook for full implementation details 😉
 In the corresponding files of `src/data_module_def`, create:
 
 1. Data Ingestion module 📥
+
 This class will:
 * Download the dataset into the appropriate folder.
 * Unzip the dataset into the appropriate folder.
 
 2. Data Validation module ✅
+
 This class will:
 * Validate columns against the schema. Optional: you can also verify the informatic type.
 * Issue a text file saying if the data is valid.
 
 3. Data Transformation module 🔄
+
 This class will:
 * Split the data into training and test sets.
 * Save the corresponding csv files into the appropriate folder.
@@ -144,11 +147,13 @@ This class will:
 In the corresponding files of `src/models_module_def`, create:
 
 1. Model trainer module 🏋️‍♂️
+
 This class will:
 * Train the model using the hyperparameters specified in `params.yaml`.
 * Save the trained model into the appropriate folder.
 
 2. Model Evaluation module 📝
+
 This class will
 * Evaluate the model and log metrics using MLFlow
 
@@ -161,7 +166,7 @@ In `src/pipeline_steps`, create scripts for each stage to instantiate and run th
 * stage04_model_trainer.py
 * stage05_model_evaluation.py
 
-## Step 7: Use DVC to connect the different stages of your pipeline
+## Step 7: Use DVC to connect the different stages of your pipeline 🦉
 Start by setting DagsHub as your distant storage through DVC.
 
 ```bash
