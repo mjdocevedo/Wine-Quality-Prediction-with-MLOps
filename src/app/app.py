@@ -124,13 +124,13 @@ def validate_wine_features(features: WineFeatures):
 
 @app.get("/", response_class=HTMLResponse)
 async def home_page(request: Request):
-    return templates.TemplateResponse("login.html", {"request": request})
+    return templates.TemplateResponse("register.html", {"request": request})
 
 @app.get("/login", response_class=HTMLResponse)
 async def login_page(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
 
-@app.post("/token", response_model=Token)
+@app.post("/token", response_class=HTMLResponse)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
     username = form_data.username
     password = form_data.password
@@ -139,16 +139,21 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         if user.username == username and verify_password(password, user.password):
             token_data = {"sub": username}
             access_token = create_access_token(token_data, expires_delta=timedelta(minutes=30))
-            return {"access_token": access_token, "token_type": "bearer"}
+            return templates.TemplateResponse("index.html", {"request": {}, "token": access_token})
     raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
 
 @app.post("/register", response_model=UserOut)
-async def register(user: User):
-    hashed_password = sha256(user.password.encode()).hexdigest()
-    user_data = user.dict(exclude={"password"})
+async def register(
+    username: str = Form(...),
+    first_name: str = Form(...),
+    last_name: str = Form(...),
+    password: str = Form(...)
+):
+    hashed_password = sha256(password.encode()).hexdigest()
+    user_data = {"username": username, "first_name": first_name, "last_name": last_name}
     user_in_db = UserInDB(**user_data, password=hashed_password)
     save_user(user_in_db)
-    return UserOut(**user_data)
+    return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
 @app.post("/predict", response_class=HTMLResponse)
 async def predict(
