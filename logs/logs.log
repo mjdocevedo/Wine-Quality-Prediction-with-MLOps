@@ -581,3 +581,77 @@ x=======x
 2024-06-28 17:35:59,851 - custom_logger - INFO - yaml file: src\data_module_def\schema.yaml loaded successfully
 2024-06-28 17:35:59,852 - custom_logger - INFO - created directory at: data/raw
 2024-06-28 17:35:59,853 - custom_logger - INFO - File already exists.
+2024-12-11 10:31:11,207 - custom_logger - INFO - Custom logger module initialized.
+2024-12-11 10:31:11,858 - custom_logger - INFO - Parent folder: C:\Users\lenov\OneDrive\Documents\Dev perso\DVC\wine_quality
+2024-12-11 10:31:11,858 - custom_logger - INFO - >>>>> stage Data Ingestion stage started <<<<<
+2024-12-11 10:31:11,863 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-12-11 10:31:11,863 - custom_logger - INFO - yaml file: src\models_module_def\params.yaml loaded successfully
+2024-12-11 10:31:11,863 - custom_logger - INFO - yaml file: src\data_module_def\schema.yaml loaded successfully
+2024-12-11 10:31:11,866 - custom_logger - INFO - created directory at: data/raw
+2024-12-11 10:31:12,668 - custom_logger - INFO - data/raw/data.zip download! With following info: 
+Connection: close
+Content-Length: 23329
+Cache-Control: max-age=300
+Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox
+Content-Type: application/zip
+ETag: "c69888a4ae59bc5a893392785a938ccd4937981c06ba8a9d6a21aa52b4ab5b6e"
+Strict-Transport-Security: max-age=31536000
+X-Content-Type-Options: nosniff
+X-Frame-Options: deny
+X-XSS-Protection: 1; mode=block
+X-GitHub-Request-Id: F292:3A4452:7D54AD:8459DC:67595BDF
+Accept-Ranges: bytes
+Date: Wed, 11 Dec 2024 09:31:11 GMT
+Via: 1.1 varnish
+X-Served-By: cache-par-lfpg1960041-PAR
+X-Cache: MISS
+X-Cache-Hits: 0
+X-Timer: S1733909472.698289,VS0,VE187
+Vary: Authorization,Accept-Encoding,Origin
+Access-Control-Allow-Origin: *
+Cross-Origin-Resource-Policy: cross-origin
+X-Fastly-Request-ID: b5bef3ce0393ee0ce7624d8467f3c024933e90a1
+Expires: Wed, 11 Dec 2024 09:36:11 GMT
+Source-Age: 0
+
+
+2024-12-11 10:31:12,688 - custom_logger - INFO - >>>>> stage Data Ingestion stage completed <<<<<
+
+x=======x
+2024-12-11 10:31:13,698 - custom_logger - INFO - Custom logger module initialized.
+2024-12-11 10:31:17,512 - custom_logger - INFO - >>>>> stage Data Validation stage started <<<<<
+2024-12-11 10:31:17,517 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-12-11 10:31:17,517 - custom_logger - INFO - yaml file: src\models_module_def\params.yaml loaded successfully
+2024-12-11 10:31:17,521 - custom_logger - INFO - yaml file: src\data_module_def\schema.yaml loaded successfully
+2024-12-11 10:31:17,521 - custom_logger - INFO - created directory at: data
+2024-12-11 10:31:17,550 - custom_logger - INFO - >>>>> stage Data Validation stage completed <<<<<
+
+x=======x
+2024-12-11 10:31:18,629 - custom_logger - INFO - Custom logger module initialized.
+2024-12-11 10:31:25,759 - custom_logger - INFO - >>>>> stage Data Transformation stage started <<<<<
+2024-12-11 10:31:25,759 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-12-11 10:31:25,766 - custom_logger - INFO - yaml file: src\models_module_def\params.yaml loaded successfully
+2024-12-11 10:31:25,768 - custom_logger - INFO - yaml file: src\data_module_def\schema.yaml loaded successfully
+2024-12-11 10:31:25,768 - custom_logger - INFO - created directory at: data/processed
+2024-12-11 10:31:25,810 - custom_logger - INFO - Splitted data into training and test sets
+2024-12-11 10:31:25,810 - custom_logger - INFO - X_train shape: (1279, 11), y_train shape: (1279,)
+2024-12-11 10:31:25,810 - custom_logger - INFO - X_test shape: (320, 11), y_test shape: (320,)
+2024-12-11 10:31:25,810 - custom_logger - INFO - >>>>> stage Data Transformation stage completed <<<<<
+
+x=======x
+2024-12-11 10:31:27,648 - custom_logger - INFO - Custom logger module initialized.
+2024-12-11 10:31:34,538 - httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+2024-12-11 10:31:34,538 - dagshub - INFO - Accessing as mjdocevedo
+2024-12-11 10:31:34,766 - httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/mjdocevedo/wine_quality "HTTP/1.1 200 OK"
+2024-12-11 10:31:34,968 - httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+2024-12-11 10:31:34,992 - dagshub - INFO - Initialized MLflow to track repo "mjdocevedo/wine_quality"
+2024-12-11 10:31:35,003 - dagshub - INFO - Repository mjdocevedo/wine_quality initialized!
+2024-12-11 10:31:35,003 - custom_logger - INFO - >>>>> stage Model evaluation stage started <<<<<
+2024-12-11 10:31:35,008 - custom_logger - INFO - yaml file: src\config.yaml loaded successfully
+2024-12-11 10:31:35,009 - custom_logger - INFO - yaml file: src\models_module_def\params.yaml loaded successfully
+2024-12-11 10:31:35,009 - custom_logger - INFO - yaml file: src\data_module_def\schema.yaml loaded successfully
+2024-12-11 10:31:35,009 - custom_logger - INFO - created directory at: metrics
+2024-12-11 10:31:36,058 - custom_logger - INFO - json file saved at: metrics\metrics.json
+2024-12-11 10:31:53,361 - custom_logger - INFO - >>>>> stage Model evaluation stage completed <<<<< 
+
+ x========x

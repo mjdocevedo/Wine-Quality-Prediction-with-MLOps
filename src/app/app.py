@@ -19,6 +19,7 @@ from pydantic import BaseModel
 from cryptography.fernet import Fernet
 import jwt
 import numpy as np
+import uvicorn
 
 from src.pipeline_steps.prediction import PredictionPipeline
 
@@ -202,5 +203,4 @@ async def predict(
         return templates.TemplateResponse("results.html", {"request": request, "prediction": e.detail})
 
 if __name__ == "__main__":
-    import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
